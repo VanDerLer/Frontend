@@ -1,0 +1,123 @@
+.vd-footer {
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    color: #1b2540;
+}
+
+/* onda do topo */
+.vd-footer__shape {
+    width: 100%;
+    height:80px;
+    /* ✅ shape menor */
+    object-fit: cover;
+    display: block;
+}
+
+/* container geral do conteúdo */
+.vd-footer__content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 0 30px;
+    /* ✅ aproximado pra ficar igual ao protótipo */
+}
+
+/* ===== PARTE DE CIMA ===== */
+.vd-footer__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+
+/* nav (Sobre, Sla, Explorar, Livros) */
+.vd-footer__nav {
+    display: flex;
+    gap: 70px;
+}
+
+.vd-footer__nav button {
+    border: none;
+    background: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #1b2540;
+}
+
+.vd-footer__nav button:hover {
+    text-decoration: underline;
+}
+
+/* redes sociais */
+.vd-footer__social {
+    display: flex;
+    gap: 24px;
+}
+
+.vd-footer__icon {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #020826;
+}
+
+.vd-footer__icon:hover {
+    opacity: 0.85;
+}
+
+/* ===== LINHA ===== */
+.vd-footer__line {
+    height: 1px;
+    background-color: #e4e7f0;
+    width: 100%;
+    margin: 0 0 32px 0;
+}
+
+/* ===== PARTE DE BAIXO ===== */
+.vd-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #7b8194;
+}
+
+.vd-footer__terms {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #1b2540;
+}
+
+.vd-footer__terms:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .vd-footer__content {
+        padding: 40px 24px 80px;
+    }
+
+    .vd-footer__top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .vd-footer__nav {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .vd-footer__line {
+        width: 100%;
+    }
+
+    .vd-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

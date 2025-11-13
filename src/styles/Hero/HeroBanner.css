@@ -1,0 +1,90 @@
+/* wrapper geral do hero */
+.hero {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* "morde" um pouco o header */
+    margin-top: -90px;
+}
+
+/* CARD – centralizado, máx 1285px, sem overflow horizontal */
+.hero-card {
+    width: 100%;
+    max-width: 1285px;
+    /* limite do Figma */
+    height: 392px;
+    margin-left: 100px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    
+}
+
+/* imagem da raposa */
+.hero-image-wrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image {
+    max-height: 300px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* textos do lado direito */
+.hero-text-wrapper {
+    flex: 1.2;
+    padding-right: 40px;
+    padding-left: 16px;
+}
+
+.hero-title {
+    font-family: "Raleway", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.2;
+    color: #111827;
+    margin: 0 0 16px 0;
+}
+
+.hero-subtitle {
+    font-family: "Raleway", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #4b5563;
+    max-width: 520px;
+    margin: 0;
+}
+
+/* responsivo */
+@media (max-width: 1024px) {
+    .hero-card {
+        height: auto;
+        flex-direction: column;
+        padding: 24px 16px;
+        max-width: calc(100% - 32px);
+        /* só dá um respiro nas laterais */
+    }
+
+    .hero-image-wrapper {
+        margin-bottom: 16px;
+    }
+
+    .hero-text-wrapper {
+        padding: 0;
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        margin: 0 auto;
+    }
+}

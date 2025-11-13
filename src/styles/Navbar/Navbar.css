@@ -1,0 +1,108 @@
+/* navbar base */
+.vd-nav {
+    width: 100%;
+    background-color: transparent;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+}
+
+/* container interno */
+.vd-nav__inner {
+    max-width: 1200px;
+    /* um pouco mais largo, como no print */
+    margin: 0 auto;
+    padding: 10px 16px;
+    /* header mais baixinho */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO VanDerLer */
+.vd-nav__logo-text {
+    font-family: "Rancho", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 64px;
+    line-height: 1;
+    color: #f58634;
+}
+
+/* links centrais */
+.vd-nav__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    /* distância entre Reservados / Procurar / Livros */
+    font-size: 14px;
+}
+
+.vd-nav__links a {
+    text-decoration: none;
+    color: #4a5168;
+    /* cinza azulado igual do protótipo */
+}
+
+.vd-nav__links a:hover {
+    color: #1b2540;
+}
+
+/* perfil / avatar */
+.vd-nav__profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 60px;
+}
+
+/* avatar com aro laranja igual o print */
+.vd-nav__avatar-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid #f58634;
+    padding: 2px;
+    overflow: hidden;
+}
+
+.vd-nav__avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.vd-nav__login {
+    font-size: 14px;
+    color: #444b63;
+    text-decoration: none;
+}
+
+.vd-nav__login:hover {
+    color: #1b2540;
+}
+
+@media (max-width: 768px) {
+    .vd-nav__inner {
+        padding-inline: 20px;
+        gap: 12px;
+    }
+
+    .vd-nav__logo-text {
+        font-size: 38px;
+    }
+
+    .vd-nav__links {
+        gap: 20px;
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,66 @@
+.book-card {
+    width: 100%;
+    /* ocupa 100% da coluna que o pai der */
+    cursor: pointer;
+    user-select: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+}
+
+/* capa */
+.book-card__cover-wrapper {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f3f4f6;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-card__cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* badge (ex: Reservado, Novo) */
+.book-card__badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #374151;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* textos */
+.book-card__info {
+    margin-top: 8px;
+}
+
+.book-card__title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #111827;
+}
+
+.book-card__author {
+    margin: 4px 0 0 0;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.book-card:hover .book-card__cover-wrapper {
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.22);
+    transform: translateY(-1px);
+    transition: all 0.15s ease-out;
+}
