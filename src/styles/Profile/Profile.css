@@ -1,0 +1,208 @@
+.profile-page {
+  position: relative;
+  min-height: calc(100vh - 0px);
+  padding: 120px 6vw 64px;
+  display: flex;
+  justify-content: center;
+}
+
+/* container principal */
+.profile-inner {
+  width: 100%;
+  max-width: 1170px;
+  position: relative;
+  z-index: 1;
+}
+
+/* título "Informações pessoais" */
+.profile-title {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #3e4b6b;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* ====== CARD ====== */
+
+.profile-card {
+  margin: 0 auto 40px auto;
+  width: 522px;           /* largura exata */
+  max-width: 100%;
+  min-height: 400px;      /* altura exata */
+  background-color: #d599df; /* cor do card */
+  border-radius: 40px;
+  padding: 36px 66px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.profile-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-label {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* input do jeito que você pediu */
+.profile-input {
+  width: 390px;   /* largura do input */
+  max-width: 100%;
+  height: 50px;   /* altura do input */
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  font-size: 16px;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #4c5468;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.profile-input::placeholder {
+  color: #8a93a5;
+}
+
+.profile-input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.profile-input--disabled {
+  cursor: default;
+}
+
+/* mensagens */
+.profile-message {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.profile-message--error {
+  color: #7b1020;
+}
+
+.profile-message--success {
+  color: #1f7a3a;
+}
+
+/* botão "Salvar Alterações" */
+.profile-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-save-btn {
+  min-width: 260px;
+  height: 56px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #bc70cb; /* cor do botão */
+  color: #ffffff;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.profile-save-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+  background-color: #b15fc3;
+}
+
+.profile-save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ====== RESERVADOS ====== */
+
+.profile-reserved {
+  margin-top: 14px;
+}
+
+.profile-reserved__title {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #3e4b6b;
+  margin-bottom: 18px;
+}
+
+.profile-reserved__list {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.profile-reserved__item {
+  flex: 0 0 auto;
+}
+
+.profile-reserved__empty {
+  font-size: 14px;
+  color: #4c5468;
+}
+
+/* ====== ILUSTRAÇÕES ====== */
+
+.profile-tree {
+  position: absolute;
+  left: 0;
+  top: 100px;
+  height: 65%;
+  max-height: 520px;
+  pointer-events: none;
+}
+
+.profile-girl {
+  position: absolute;
+  right: 0;
+  bottom: 40px;
+  height: 55%;
+  max-height: 420px;
+  pointer-events: none;
+}
+
+/* ====== RESPONSIVO ====== */
+
+@media (max-width: 900px) {
+  .profile-page {
+    padding: 110px 16px 40px;
+  }
+
+  .profile-card {
+    width: 100%;
+    padding: 28px 24px;
+  }
+
+  .profile-input {
+    width: 100%;
+  }
+
+  .profile-tree,
+  .profile-girl {
+    opacity: 0.2;
+  }
+}

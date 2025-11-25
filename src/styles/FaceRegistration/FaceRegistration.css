@@ -1,0 +1,225 @@
+/* src/styles/FaceRegistration/FaceRegistration.css */
+
+.face-page {
+  min-height: 100vh;
+  background: #2f2f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.face-card {
+  width: 100%;
+  max-width: 1120px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 40px 56px 48px;
+  box-sizing: border-box;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Cabeçalho */
+
+.face-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.face-header-texts {
+  max-width: 70%;
+}
+
+.face-title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.face-subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555555;
+}
+
+/* Logo / marca no canto direito */
+
+.face-logo-placeholder {
+  min-width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.face-logo-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #777777;
+}
+
+/* Progresso */
+
+.face-progress {
+  margin-top: 24px;
+}
+
+.face-step-text {
+  font-size: 13px;
+  color: #555555;
+  margin-bottom: 6px;
+}
+
+.face-progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: #eeeeee;
+  overflow: hidden;
+}
+
+.face-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #a4a8d9; /* lilás/acizentado */
+  transition: width 0.3s ease;
+}
+
+.face-progress-fill-half {
+  width: 50%;
+}
+
+.face-progress-fill-full {
+  width: 100%;
+}
+
+/* Área principal: quadro */
+
+.face-main {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 32px;
+}
+
+.face-frame {
+  width: 260px;
+  height: 360px;
+  border-radius: 40px;
+  background: #f7d0d8; /* tom rosado do mock */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.face-video,
+.face-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Erro */
+
+.face-error {
+  text-align: center;
+  color: #d32f2f;
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+/* Botões */
+
+.face-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.face-btn {
+  min-width: 180px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease,
+    background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.face-btn-primary {
+  background: #a4a8d9;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(164, 168, 217, 0.4);
+}
+
+.face-btn-primary:hover {
+  background: #8f93ce;
+}
+
+.face-btn-secondary {
+  background: #f2f2f7;
+  color: #555555;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.face-btn-secondary:hover {
+  background: #e4e4f0;
+}
+
+.face-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.face-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsivo */
+
+@media (max-width: 768px) {
+  .face-card {
+    padding: 24px 20px 32px;
+  }
+
+  .face-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .face-header-texts {
+    max-width: 100%;
+  }
+
+  .face-main {
+    margin-top: 28px;
+  }
+
+  .face-frame {
+    width: 220px;
+    height: 320px;
+  }
+
+  .face-actions {
+    flex-direction: column;
+  }
+
+  .face-btn {
+    width: 100%;
+  }
+}

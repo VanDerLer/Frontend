@@ -1,7 +1,9 @@
+// src/components/Navbar/Navbar.jsx
 import { Link } from "react-router-dom";
 import "../../styles/Navbar/Navbar.css";
 
 export default function Navbar() {
+  // 🔹 depois podemos trocar isso para o usuário real logado
   const user = {
     name: "Nicolas",
     avatar:
@@ -19,13 +21,16 @@ export default function Navbar() {
         {/* LINKS CENTRAIS */}
         <ul className="vd-nav__links">
           <li>
+            {/* ✅ livros que o usuário salvou */}
             <Link to="/my-books">Reservados</Link>
           </li>
           <li>
-            <Link to="/home">Procurar Livros</Link>
+            {/* ✅ página inicial com vitrine de livros */}
+            <Link to="/">Procurar Livros</Link>
           </li>
           <li>
-            <Link to="/books">Livros</Link>
+            {/* por enquanto também manda pra home */}
+            <Link to="/">Livros</Link>
           </li>
         </ul>
 

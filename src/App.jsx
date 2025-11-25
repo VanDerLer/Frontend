@@ -1,38 +1,96 @@
+// src/App.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
+
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
+import BookDetail from "./pages/BookDetails/BookDetails";
+import FaceRegistration from "./pages/FaceRegistration/FaceRegistration";
+import FaceVerification from "./pages/FaceVerification/FaceVerification";
+import Profile from "./pages/Profile/Profile"; // ✅ perfil
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
-import bg from "./assets/svg/background.svg"; 
+import homeBg from "./assets/svg/background.svg";
+import pinkInfoBg from "./assets/infos/info-bg-pink.png";
+import purpleProfileBg from "./assets/auth/register-bg-purple.png"; // ✅ fundo perfil
+
 function App() {
   const location = useLocation();
+  const path = location.pathname;
 
-  const hideLayout = ["/login", "/register"].includes(location.pathname);
-  const isHome = location.pathname === "/";
+  // telas sem navbar/footer
+  const hideLayout =
+    ["/login", "/register", "/face-registration"].includes(path) ||
+    path.startsWith("/face-verification");
 
-  const showBackground = !hideLayout && isHome;
+  const isHome = path === "/";
+  const isBookDetail = path.startsWith("/books");
+  const isProfile = path.startsWith("/profile"); // ✅
+
+  // classes da div raiz
+  let wrapperClasses = "min-h-screen flex flex-col";
+  if (!isHome && !isBookDetail && !isProfile) {
+    // outras telas seguem com fundo branco
+    wrapperClasses += " bg-white";
+  }
+
+  // estilo de background por rota
+  let backgroundStyle = undefined;
+
+  if (isHome) {
+    backgroundStyle = {
+      backgroundImage: `url(${homeBg})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "top center",
+      backgroundSize: "cover",
+    };
+  } else if (isBookDetail) {
+    backgroundStyle = {
+      backgroundImage: `url(${pinkInfoBg})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+    };
+  } else if (isProfile) {
+    backgroundStyle = {
+      backgroundImage: `url(${purpleProfileBg})`,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+    };
+  }
 
   return (
-    <div
-      className={`min-h-screen flex flex-col ${
-        showBackground ? "bg-no-repeat bg-cover bg-top" : "bg-white"
-      }`}
-      style={showBackground ? { backgroundImage: `url(${bg})` } : undefined}
-    >
+    <div className={wrapperClasses} style={backgroundStyle}>
       {!hideLayout && <Navbar />}
 
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          {/* cadastro facial */}
+          <Route path="/face-registration" element={<FaceRegistration />} />
+
+          {/* verificação facial antes de abrir o livro */}
+          <Route
+            path="/face-verification/:id"
+            element={<FaceVerification />}
+          />
+
+          {/* perfil */}
+          <Route path="/profile" element={<Profile />} />
+
+          <Route path="/books/:id" element={<BookDetail />} />
         </Routes>
       </main>
 
-      {!hideLayout && <Footer />}
+      {/* não tem footer na tela de detalhes */}
+      {!hideLayout && !isBookDetail && <Footer />}
     </div>
   );
 }

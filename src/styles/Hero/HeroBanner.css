@@ -4,7 +4,8 @@
     display: flex;
     justify-content: center;
     /* "morde" um pouco o header */
-    margin-top: -90px;
+    margin-top: -70px;
+    margin-bottom: -75px;
 }
 
 /* CARD – centralizado, máx 1285px, sem overflow horizontal */

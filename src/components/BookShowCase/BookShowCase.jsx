@@ -1,94 +1,64 @@
-import React, { useState } from "react";
-import "../../styles/BookShowCase/BooksShowCase.css"; // ✅ caminho real do CSS
+// src/components/BookShowCase/BookShowCase.jsx
+import React, { useEffect, useState, useMemo } from "react";
+import "../../styles/BookShowCase/BooksShowCase.css";
 import BookCard from "../BookCard/BookCard";
-import defaultCover from "../../assets/covers/default-cover.jpg"; // ✅ .jpg e caminho certo
+import defaultCover from "../../assets/covers/default-cover.jpg";
+
+import { listBooks } from "../../service/bookService";
 
 const CATEGORIES = ["Ficção", "Romance", "Drama", "Ação", "Infantil"];
 
-// Livros por categoria (mock)
-const BOOKS_BY_CATEGORY = {
-  Ficção: [
-    {
-      id: 1,
-      title: "Five Nights at Freddy's: The Fourth Closet",
-      author: "Scott Cawthon",
-      cover: defaultCover,
-    },
-    {
-      id: 2,
-      title: "Freddy",
-      author: "Autor X",
-      cover: defaultCover,
-    },
-    {
-      id: 3,
-      title: "The Silver Eyes",
-      author: "Scott Cawthon",
-      cover: defaultCover,
-    },
-    {
-      id: 4,
-      title: "The Fourth Closet",
-      author: "Scott Cawthon",
-      cover: defaultCover,
-    },
-  ],
-  Romance: [
-    {
-      id: 5,
-      title: "A Hipótese do Amor",
-      author: "Ali Hazelwood",
-      cover: defaultCover,
-    },
-    {
-      id: 6,
-      title: "Como eu era antes de você",
-      author: "Jojo Moyes",
-      cover: defaultCover,
-    },
-  ],
-  Drama: [],
-  Ação: [],
-  Infantil: [],
-};
-
-// "Os mais adquiridos" (top 5)
-const BEST_SELLERS = [
-  {
-    id: 101,
-    rank: 1,
-    title: "A Hipótese do AMOR",
-    cover: defaultCover,
-  },
-  {
-    id: 102,
-    rank: 2,
-    title: "Como eu era antes de você",
-    cover: defaultCover,
-  },
-  {
-    id: 103,
-    rank: 3,
-    title: "O poder da ação",
-    cover: defaultCover,
-  },
-  {
-    id: 104,
-    rank: 4,
-    title: "A guerra dos mundos",
-    cover: defaultCover,
-  },
-  {
-    id: 105,
-    rank: 5,
-    title: "Vamos dormir?",
-    cover: defaultCover,
-  },
-];
-
 export default function BookShowCase() {
   const [activeCategory, setActiveCategory] = useState("Ficção");
-  const currentBooks = BOOKS_BY_CATEGORY[activeCategory] || [];
+
+  const [books, setBooks] = useState([]);
+  const [loadingBooks, setLoadingBooks] = useState(false);
+  const [errorBooks, setErrorBooks] = useState("");
+
+  useEffect(() => {
+    async function fetchBooks() {
+      try {
+        setLoadingBooks(true);
+        setErrorBooks("");
+
+        // 🔹 hoje o back não tem categoria, então traz tudo
+        const data = await listBooks();
+        setBooks(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("[BookShowCase] erro ao carregar livros:", err);
+        setErrorBooks("Não foi possível carregar os livros.");
+        setBooks([]);
+      } finally {
+        setLoadingBooks(false);
+      }
+    }
+
+    fetchBooks();
+  }, []);
+
+  // 🔹 Aqui a mágica das categorias
+  const filteredBooks = useMemo(() => {
+    if (!books || books.length === 0) return [];
+
+    // 1) Se o back JÁ tiver campo "categoria", usa ele pra filtrar certinho
+    if (books.some((b) => b.categoria)) {
+      return books.filter(
+        (b) =>
+          (b.categoria || "").toLowerCase() === activeCategory.toLowerCase()
+      );
+    }
+
+    // 2) Fallback: enquanto o back não tem categoria,
+    // distribui os livros de forma "fake" pelas abas,
+    // só pra não ficar tudo igual em todas.
+    const catIndex = CATEGORIES.indexOf(activeCategory);
+    if (catIndex === -1) return books;
+
+    return books.filter((_, idx) => idx % CATEGORIES.length === catIndex);
+  }, [books, activeCategory]);
+
+  // "Os mais adquiridos" (top 5 geral por enquanto)
+  const bestSellers = books.slice(0, 5);
 
   return (
     <section className="books-showcase">
@@ -111,49 +81,92 @@ export default function BookShowCase() {
           </nav>
 
           <div className="books-row">
-            {currentBooks.length === 0 && (
-              <p className="books-empty">
-                Ainda não há livros cadastrados nesta categoria.
-              </p>
+            {loadingBooks && (
+              <p className="books-empty">Carregando livros...</p>
             )}
 
-            {currentBooks.map((book) => (
-              <div key={book.id} className="books-row__item">
-                <BookCard
-                  id={book.id}
-                  title={book.title}
-                  author={book.author}
-                  cover={book.cover}
-                />
-              </div>
-            ))}
+            {!loadingBooks && errorBooks && (
+              <p className="books-empty">{errorBooks}</p>
+            )}
+
+            {!loadingBooks &&
+              !errorBooks &&
+              filteredBooks.length === 0 &&
+              books.length > 0 && (
+                <p className="books-empty">
+                  Não há livros nessa categoria ainda.
+                </p>
+              )}
+
+            {!loadingBooks &&
+              !errorBooks &&
+              books.length === 0 && (
+                <p className="books-empty">Ainda não há livros cadastrados.</p>
+              )}
+
+            {!loadingBooks &&
+              !errorBooks &&
+              filteredBooks.map((book) => {
+                const id = book.id;
+                const title = book.titulo || book.title || "Livro sem título";
+                const author =
+                  book.autor || book.author || "Autor não informado";
+                const cover = defaultCover; // 🔸 por enquanto o back não tem capa
+
+                return (
+                  <div key={id} className="books-row__item">
+                    <BookCard
+                      id={id}
+                      title={title}
+                      author={author}
+                      cover={cover}
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
 
-        {/* LINHA LARANJA ENTRE AS SEÇÕES */}
+        {/* LINHA ENTRE AS SEÇÕES */}
         <div className="books-divider" />
 
         {/* ====== OS MAIS ADQUIRIDOS ====== */}
         <div className="books-bottom">
           <h2 className="books-bottom__title">Os mais adquiridos</h2>
 
-          <div className="best-sellers-row">
-            {BEST_SELLERS.map((book) => (
-              <div key={book.id} className="best-seller-card">
-                <div className="best-seller-card__rank">{book.rank}</div>
+          {bestSellers.length === 0 && !loadingBooks && !errorBooks && (
+            <p className="books-empty">
+              Ainda não há livros marcados como mais adquiridos.
+            </p>
+          )}
 
-                <div className="best-seller-card__image-wrapper">
-                  <img
-                    src={book.cover || defaultCover}
-                    alt={`Capa do livro ${book.title}`}
-                    className="best-seller-card__image"
-                  />
-                </div>
+          {bestSellers.length > 0 && (
+            <div className="best-sellers-row">
+              {bestSellers.map((book, index) => {
+                const id = book.id;
+                const title =
+                  book.titulo || book.title || "Livro sem título";
+                const cover = defaultCover;
+                const rank = index + 1;
 
-                <p className="best-seller-card__title">{book.title}</p>
-              </div>
-            ))}
-          </div>
+                return (
+                  <div key={id} className="best-seller-card">
+                    <div className="best-seller-card__rank">{rank}</div>
+
+                    <div className="best-seller-card__image-wrapper">
+                      <img
+                        src={cover}
+                        alt={`Capa do livro ${title}`}
+                        className="best-seller-card__image"
+                      />
+                    </div>
+
+                    <p className="best-seller-card__title">{title}</p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>
