@@ -1,0 +1,180 @@
+/* ====== PÁGINA ====== */
+
+.reserved-page {
+    position: relative;
+    min-height: calc(100vh - 0px);
+    padding: 120px 6vw 64px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180deg, #f6d9ff 0%, #f3c6ff 40%, #f1b9ff 100%);
+}
+
+.reserved-inner {
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+    z-index: 1;
+    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+}
+
+/* ====== HEADER ====== */
+
+.reserved-header {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.reserved-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #3e4b6b;
+    margin-bottom: 6px;
+}
+
+.reserved-subtitle {
+    font-size: 14px;
+    color: #4c5468;
+    opacity: 0.9;
+}
+
+/* ====== CARD ROXO PRINCIPAL ====== */
+
+.reserved-card {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    background-color: #d599df;
+    border-radius: 28px;
+    padding: 22px 24px 26px;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.12);
+}
+
+/* mensagem de erro/vazio/carregando */
+
+.reserved-message {
+    font-size: 14px;
+    color: #4c5468;
+    text-align: center;
+    margin: 4px 0 2px;
+}
+
+.reserved-message--error {
+    color: #7b1020;
+}
+
+/* ====== GRID DE LIVROS ====== */
+
+.reserved-list {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+/* item individual */
+
+.reserved-item {
+    position: relative;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 12px 12px 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+    display: flex;
+    align-items: stretch;
+}
+
+/* selo "Reservado" */
+
+.reserved-status {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background-color: #bc70cb;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* envoltório do BookCard (pra garantir que ele ocupe a largura certinho) */
+
+.reserved-bookcard-wrapper {
+    width: 100%;
+}
+
+/* ====== AÇÕES (botão voltar) ====== */
+
+.reserved-actions {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+}
+
+.reserved-back-btn {
+    min-width: 190px;
+    height: 44px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #bc70cb;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+    transition: transform 0.15s ease, box-shadow 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.reserved-back-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+    background-color: #b15fc3;
+}
+
+/* ====== ILUSTRAÇÕES ====== */
+
+.reserved-tree {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    height: 100%;
+    max-height: 760px;
+    pointer-events: none;
+}
+
+.reserved-girl {
+    position: absolute;
+    right: 0;
+    bottom: 380px;
+    height: 55%;
+    max-height: 420px;
+    pointer-events: none;
+}
+
+/* ====== RESPONSIVO ====== */
+
+@media (max-width: 900px) {
+    .reserved-page {
+        padding: 110px 16px 40px;
+    }
+
+    .reserved-card {
+        max-width: 100%;
+        padding: 20px 18px 22px;
+    }
+
+    .reserved-list {
+        grid-template-columns: 1fr;
+    }
+
+    .reserved-tree,
+    .reserved-girl {
+        opacity: 0.18;
+    }
+}

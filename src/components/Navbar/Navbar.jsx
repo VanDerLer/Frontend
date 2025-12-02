@@ -22,11 +22,7 @@ export default function Navbar() {
         <ul className="vd-nav__links">
           <li>
             {/* ✅ livros que o usuário salvou */}
-            <Link to="/my-books">Reservados</Link>
-          </li>
-          <li>
-            {/* ✅ página inicial com vitrine de livros */}
-            <Link to="/">Procurar Livros</Link>
+            <Link to="/reserved">Reservados</Link>
           </li>
           <li>
             {/* por enquanto também manda pra home */}
