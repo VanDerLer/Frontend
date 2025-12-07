@@ -1,4 +1,4 @@
-// src/pages/Register/Register.jsx
+// src/pages/Register/Register.jsx 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -126,11 +126,46 @@ export default function Register() {
       navigate("/login");
     } catch (err) {
       console.error("Erro ao cadastrar:", err);
-      const msg =
-        err?.response?.data?.message ||
-        err?.response?.data?.erro ||
-        "Erro ao cadastrar. Verifique os dados e tente novamente.";
-      setErro(msg);
+
+      const status = err?.response?.status;
+      const data = err?.response?.data;
+      const url =
+        err?.config?.url || err?.response?.config?.url || "";
+
+      let backendMsg = "";
+
+      if (data) {
+        if (typeof data === "string") {
+          backendMsg = data;
+        } else {
+          backendMsg =
+            data.detail || // ProblemDetail (Spring Boot 3)
+            data.message ||
+            data.erro ||
+            data.error ||
+            "";
+        }
+      }
+
+      // 🧠 Caso específico: erro ao cadastrar na rota /auth/register
+      // e o status veio como 400 ou 403 -> tratamos como e-mail já cadastrado
+      if (
+        url.includes("/auth/register") &&
+        (status === 400 || status === 403)
+      ) {
+        setErro(
+          "Este e-mail já está cadastrado. Tente fazer login ou use outro e-mail."
+        );
+      } else if (status === 400 && backendMsg) {
+        setErro(
+          backendMsg ||
+            "Erro ao cadastrar. Verifique os dados e tente novamente."
+        );
+      } else {
+        setErro(
+          "Não foi possível concluir o cadastro agora. Tente novamente em alguns instantes."
+        );
+      }
     } finally {
       setLoading(false);
     }
