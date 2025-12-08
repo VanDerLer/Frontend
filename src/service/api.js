@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://vanderler.azurewebsites.net",
 });
 
 // Interceptor pra mandar o JWT em TODAS as requisições
