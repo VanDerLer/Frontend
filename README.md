@@ -9,6 +9,7 @@
 ## 🧭 Sumário
 
 - [Visão Geral](#-visão-geral)
+- [Deploy / Demonstração Online](#-deploy--demonstração-online)
 - [Funcionalidades](#-funcionalidades)
 - [Stack Tecnológica](#-stack-tecnológica)
 - [Arquitetura do Projeto](#-arquitetura-do-projeto)
@@ -39,6 +40,18 @@ Este repositório é **exclusivamente o frontend** da aplicação, construído c
 - **React 19** + **Vite**
 - Integração com API REST via **Axios**
 - Navegação cliente-side com **React Router DOM**
+
+---
+
+## 🌐 Deploy / Demonstração Online
+
+A versão atual do frontend está hospedada em produção em:
+
+👉 **Netlify:** https://vanderler.netlify.app/
+
+Recomendado acessar de preferência em um navegador moderno (Chrome, Edge, Firefox) para melhor experiência.
+
+> Lembre-se: algumas funcionalidades dependem do back-end estar online e corretamente configurado (especialmente login, listagem de livros e fluxo de reconhecimento facial).
 
 ---
 
@@ -398,6 +411,10 @@ Sim. Gere o build com `npm run build` e sirva a pasta `dist` com Nginx, Apache o
 
 **5. A validação facial sempre funciona de forma real?**  
 Não necessariamente. Se a Azure estiver fora, com key expirada ou limite gratuito estourado, o back-end entra em modo de simulação e **aceita qualquer foto**. Para validar de verdade, atualize a key da Azure no `application.properties`.
+
+**6. A URL de produção é sempre a mesma?**  
+Neste projeto, o deploy atual está em: **https://vanderler.netlify.app/**.  
+Se futuramente o domínio mudar, atualize esta seção do README.
 
 ---
 
